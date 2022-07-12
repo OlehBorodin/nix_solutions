@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AutoRepository implements CrudRepository {
+public class AutoRepository implements CrudRepository<Auto> {
     private final List<Auto> autos;
 
     public AutoRepository() {
@@ -59,14 +59,6 @@ public class AutoRepository implements CrudRepository {
         return false;
     }
 
-    public boolean updateByBodyType(String bodyType, Auto copyFrom) {
-        for (Auto auto : autos) {
-            if (auto.getBodyType().equals(bodyType)) {
-                AutoCopy.copy(copyFrom, auto);
-            }
-        }
-        return true;
-    }
 
     @Override
     public boolean delete(String id) {

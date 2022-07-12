@@ -1,5 +1,5 @@
 package com.model;
 
-public enum Manufacturer {
+public enum ManufacturerAuto {
     KIA, BMW, ZAZ, OPEL
 }

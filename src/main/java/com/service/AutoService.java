@@ -1,7 +1,8 @@
 package com.service;
 
 import com.model.Auto;
-import com.model.Manufacturer;
+import com.model.BodyType;
+import com.model.ManufacturerAuto;
 import com.repository.AutoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,12 +25,7 @@ public class AutoService {
     public List<Auto> createAndSaveAutos(int count) {
         List<Auto> result = new LinkedList<>();
         for (int i = 0; i < count; i++) {
-            final Auto auto = new Auto(
-                    "Model-" + RANDOM.nextInt(1000),
-                    getRandomManufacturer(),
-                    BigDecimal.valueOf(RANDOM.nextDouble(1000.0)),
-                    "Model-" + RANDOM.nextInt(1000)
-            );
+            final Auto auto = new Auto("Model-" + RANDOM.nextInt(1000), BigDecimal.valueOf(RANDOM.nextDouble(1000.0)), getRandomManufacturer(), getBodyType());
             result.add(auto);
             autoRepository.save(auto);
             LOGGER.debug("Created auto {}", auto.getId());
@@ -37,8 +33,14 @@ public class AutoService {
         return result;
     }
 
-    private Manufacturer getRandomManufacturer() {
-        final Manufacturer[] values = Manufacturer.values();
+    private ManufacturerAuto getRandomManufacturer() {
+        final ManufacturerAuto[] values = ManufacturerAuto.values();
+        final int index = RANDOM.nextInt(values.length);
+        return values[index];
+    }
+
+    private BodyType getBodyType() {
+        final BodyType[] values = BodyType.values();
         final int index = RANDOM.nextInt(values.length);
         return values[index];
     }
@@ -60,4 +62,22 @@ public class AutoService {
             return autoRepository.getById(id);
         }
     }
-}
+
+    public boolean update(Auto auto) {
+        if(autoRepository.getById(auto.getId())!=null){
+            LOGGER.debug("Update auto {}", auto.getId());
+        }
+        return autoRepository.update(auto);
+    }
+    public boolean delete(Auto auto) {
+        if(autoRepository.delete(auto.getId())){
+            LOGGER.debug("Delete auto {}", auto.getId());
+            return true;
+        }
+        return false;
+    }
+
+    }
+
+
+

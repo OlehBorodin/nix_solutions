@@ -1,2 +1,6 @@
-package com.model;public enum BodyType {
+package com.model;
+
+public enum BodyType {
+   HATCHBACK, SEDAN, SUV, COUPE, CONVERTIBLE
+
 }

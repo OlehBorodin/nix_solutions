@@ -1,19 +1,19 @@
 package com.repository;
 
-import com.model.Auto;
+import com.model.Vehicle;
 
 import java.util.List;
 
-public interface CrudRepository {
-    Auto getById(String id);
+public interface CrudRepository<Temporary extends Vehicle> {
+    Temporary getById(String id);
 
-    List<Auto> getAll();
+    List<Temporary> getAll();
 
-    boolean save(Auto auto);
+    boolean save(Temporary temporary);
 
-    boolean saveAll(List<Auto> auto);
+    boolean saveAll(List<Temporary> temporary);
 
-    boolean update(Auto auto);
+    boolean update(Temporary temporary);
 
     boolean delete(String id);
 }
