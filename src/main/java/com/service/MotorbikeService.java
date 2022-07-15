@@ -39,8 +39,9 @@ public class MotorbikeService {
     }
 
 
-    public void saveMotorbike(List<Motorbike> motorbikes) {
+    public boolean saveMotorbike(List<Motorbike> motorbikes) {
         motorbikeRepository.saveAll(motorbikes);
+        return false;
     }
 
     public void printAll() {

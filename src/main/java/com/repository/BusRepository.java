@@ -33,6 +33,9 @@ public class BusRepository implements CrudRepository<Bus> {
 
     @Override
     public boolean save(Bus bus) {
+        if (bus == null) {
+            throw new IllegalArgumentException("Bus must not be null");
+        }
         if (bus.getPrice().equals(BigDecimal.ZERO)) {
             bus.setPrice(BigDecimal.valueOf(-1));
         }
@@ -45,7 +48,7 @@ public class BusRepository implements CrudRepository<Bus> {
         if (bus == null) {
             return false;
         }
-        return bus.addAll(bus);
+        return buses.addAll(bus);
     }
 
     @Override

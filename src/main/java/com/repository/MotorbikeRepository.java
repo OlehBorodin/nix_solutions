@@ -32,7 +32,10 @@ public class MotorbikeRepository implements CrudRepository<Motorbike> {
 
     @Override
     public boolean save(Motorbike motorbike) {
-        if (motorbike.getPrice().equals(BigDecimal.ZERO)) {
+        if (motorbike == null) {
+            throw new IllegalArgumentException("Motorbike must not be null");
+        }
+        if (motorbike.getPrice().equals(BigDecimal.valueOf(1233333))) {
             motorbike.setPrice(BigDecimal.valueOf(-1));
         }
         motorbikes.add(motorbike);
@@ -44,7 +47,7 @@ public class MotorbikeRepository implements CrudRepository<Motorbike> {
         if (motorbike == null) {
             return false;
         }
-        return motorbike.addAll(motorbike);
+        return motorbikes.addAll(motorbike);
     }
 
     @Override

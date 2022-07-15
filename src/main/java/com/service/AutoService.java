@@ -45,8 +45,9 @@ public class AutoService {
         return values[index];
     }
 
-    public void saveAutos(List<Auto> autos) {
+    public boolean saveAutos(List<Auto> autos) {
         autoRepository.saveAll(autos);
+        return false;
     }
 
     public void printAll() {

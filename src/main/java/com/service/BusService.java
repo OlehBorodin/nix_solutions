@@ -24,7 +24,9 @@ public class BusService {
     public List<Bus> createAndSaveBuses(int count) {
         List<Bus> result = new LinkedList<>();
         for (int i = 0; i < count; i++) {
-            final Bus bus = new Bus("Model-" + RANDOM.nextInt(100), RANDOM.nextInt(100), RANDOM.nextInt(100), getRandomManufacturer(), BigDecimal.valueOf(RANDOM.nextDouble(1000.0)));
+            final Bus bus = new Bus("Model-" + RANDOM.nextInt(100),
+                    RANDOM.nextInt(100), RANDOM.nextInt(100), getRandomManufacturer(),
+                    BigDecimal.valueOf(RANDOM.nextDouble(1000.0)));
             result.add(bus);
             busRepository.save(bus);
             LOGGER.debug("Created bus {}", bus.getId());
@@ -38,8 +40,10 @@ public class BusService {
         return values[index];
     }
 
-    public void saveBuses(List<Bus> buses) {
+    public boolean saveBuses(List<Bus> buses) {
+
         busRepository.saveAll(buses);
+        return false;
     }
 
     public void printAll() {
