@@ -31,14 +31,14 @@ public class MotorbikeRepositoryTest {
 
     @Test
     void getById_findOne() {
-        final Motorbike motorbike1 = target.getById(motorbike.getId());
+        final Motorbike motorbike1 = target.findById(motorbike.getId());
         Assertions.assertNotNull(motorbike1);
         Assertions.assertEquals(motorbike.getId(), motorbike1.getId());
     }
 
     @Test
     void getById_notFind() {
-        final Motorbike motorbike1 = target.getById("123");
+        final Motorbike motorbike1 = target.findById("123");
         Assertions.assertNull(motorbike1);
     }
 
@@ -46,7 +46,7 @@ public class MotorbikeRepositoryTest {
     void getById_findOne_manyAutos() {
         final Motorbike motorbike2 = createSimpleMotorbike();
         target.save(motorbike2);
-        final Motorbike motorbike1 = target.getById(motorbike.getId());
+        final Motorbike motorbike1 = target.findById(motorbike.getId());
         Assertions.assertNotNull(motorbike1);
         Assertions.assertEquals(motorbike.getId(), motorbike1.getId());
         Assertions.assertNotEquals(motorbike2.getId(), motorbike1.getId());
@@ -64,7 +64,7 @@ public class MotorbikeRepositoryTest {
         motorbike.setPrice(BigDecimal.ONE);
         final boolean motorbike1 = target.save(motorbike);
         Assertions.assertTrue(motorbike1);
-        final Motorbike newMotorbike = target.getById(motorbike.getId());
+        final Motorbike newMotorbike = target.findById(motorbike.getId());
         Assertions.assertEquals(BigDecimal.ONE, newMotorbike.getPrice());
     }
 
@@ -76,7 +76,7 @@ public class MotorbikeRepositoryTest {
     @Test
     void save_success_changePrice() {
         target.save(motorbike);
-        final Motorbike motorbike1 = target.getById(motorbike.getId());
+        final Motorbike motorbike1 = target.findById(motorbike.getId());
         Assertions.assertEquals(BigDecimal.valueOf(1234), motorbike1.getPrice());
     }
 
@@ -110,7 +110,7 @@ public class MotorbikeRepositoryTest {
         motorbike.setPrice(BigDecimal.TEN);
         final boolean motorbike1 = target.update(motorbike);
         Assertions.assertTrue(motorbike1);
-        final Motorbike motorbike2 = target.getById(motorbike.getId());
+        final Motorbike motorbike2 = target.findById(motorbike.getId());
         Assertions.assertEquals(BigDecimal.TEN, motorbike2.getPrice());
     }
 

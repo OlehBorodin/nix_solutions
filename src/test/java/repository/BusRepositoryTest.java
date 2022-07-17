@@ -32,14 +32,14 @@ public class BusRepositoryTest {
 
     @Test
     void getById_findOne() {
-        final Bus bus1 = target.getById(bus.getId());
+        final Bus bus1 = target.findById(bus.getId());
         Assertions.assertNotNull(bus1);
         Assertions.assertEquals(bus.getId(), bus1.getId());
     }
 
     @Test
     void getById_notFind() {
-        final Bus bus1 = target.getById("123");
+        final Bus bus1 = target.findById("123");
         Assertions.assertNull(bus1);
     }
 
@@ -47,7 +47,7 @@ public class BusRepositoryTest {
     void getById_findOne_manyAutos() {
         final Bus bus2 = createSimpleBus();
         target.save(bus2);
-        final Bus bus1 = target.getById(bus.getId());
+        final Bus bus1 = target.findById(bus.getId());
         Assertions.assertNotNull(bus1);
         Assertions.assertEquals(bus.getId(), bus1.getId());
         Assertions.assertNotEquals(bus2.getId(), bus1.getId());
@@ -65,7 +65,7 @@ public class BusRepositoryTest {
         bus.setPrice(BigDecimal.ONE);
         final boolean bus1 = target.save(bus);
         Assertions.assertTrue(bus1);
-        final Bus bus3 = target.getById(bus.getId());
+        final Bus bus3 = target.findById(bus.getId());
         Assertions.assertEquals(BigDecimal.ONE, bus3.getPrice());
     }
 
@@ -79,7 +79,7 @@ public class BusRepositoryTest {
         BigDecimal currentPrice = bus.getPrice();
         bus.setPrice(BigDecimal.valueOf(1234));
         target.save(bus);
-        final Bus bus1 = target.getById(bus.getId());
+        final Bus bus1 = target.findById(bus.getId());
         Assertions.assertEquals(BigDecimal.valueOf(1234), bus1.getPrice());
         Assertions.assertNotEquals(currentPrice, bus1.getPrice());
     }
@@ -114,7 +114,7 @@ public class BusRepositoryTest {
         bus.setPrice(BigDecimal.TEN);
         final boolean bus1 = target.update(bus);
         Assertions.assertTrue(bus1);
-        final Bus bus2 = target.getById(bus.getId());
+        final Bus bus2 = target.findById(bus.getId());
         Assertions.assertEquals(BigDecimal.TEN, bus2.getPrice());
     }
 

@@ -3,17 +3,18 @@ package com.repository;
 import com.model.Vehicle;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface CrudRepository<Temporary extends Vehicle> {
-    Temporary getById(String id);
+public interface CrudRepository<T extends Vehicle> {
+    Optional <T> findById(String id);
 
-    List<Temporary> getAll();
+    List<T> getAll();
 
-    boolean save(Temporary temporary);
+    boolean save(T temporary);
 
-    boolean saveAll(List<Temporary> temporary);
+    boolean saveAll(List<T> temporary);
 
-    boolean update(Temporary temporary);
+    boolean update(T temporary);
 
     boolean delete(String id);
 }

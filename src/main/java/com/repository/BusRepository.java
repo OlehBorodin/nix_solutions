@@ -3,10 +3,7 @@ package com.repository;
 import com.model.Bus;
 
 import java.math.BigDecimal;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class BusRepository implements CrudRepository<Bus> {
     private final List<Bus> buses;
@@ -16,13 +13,13 @@ public class BusRepository implements CrudRepository<Bus> {
     }
 
     @Override
-    public Bus getById(String id) {
+    public Optional <Bus> findById(String id) {
         for (Bus bus : buses) {
             if (bus.getId().equals(id)) {
-                return bus;
+                return Optional.of(bus);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
 
@@ -53,9 +50,9 @@ public class BusRepository implements CrudRepository<Bus> {
 
     @Override
     public boolean update(Bus bus) {
-        final Bus founded = getById(bus.getId());
-        if (founded != null) {
-            BusRepository.BusCopy.copy(bus, founded);
+        final Optional<Bus> optionalBus = findById(bus.getId());
+        if (optionalBus.isPresent()) {
+            optionalBus.ifPresent(founded -> BusRepository.BusCopy.copy(bus, founded));
             return true;
         }
         return false;

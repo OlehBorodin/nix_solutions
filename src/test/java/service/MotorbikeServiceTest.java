@@ -63,18 +63,10 @@ public class MotorbikeServiceTest {
     }
 
     @Test
-    void findOneById_null1() {
-        final Motorbike expected = createSimpleMotorbike();
-        Mockito.when(motorbikeRepository.getById("")).thenReturn(expected);
-        final Motorbike actual = target.findOneById(null);
-        Assertions.assertEquals(expected.getId(), actual.getId());
-    }
-
-    @Test
     void findOneById_null2() {
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         target.findOneById(null);
-        Mockito.verify(motorbikeRepository).getById(captor.capture());
+        Mockito.verify(motorbikeRepository).findById(captor.capture());
         Assertions.assertEquals("", captor.getValue());
     }
 

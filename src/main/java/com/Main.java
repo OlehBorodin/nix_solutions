@@ -31,6 +31,7 @@ public class Main {
                 final List<Auto> autos = AUTO_SERVICE.createAndSaveAutos(4);
                 AUTO_SERVICE.saveAutos(autos);
                 AUTO_SERVICE.printAll();
+                AUTO_SERVICE.optionalExmaples();
 
                 Auto auto = autos.get(2);
                 auto.setModel("new model");
@@ -42,6 +43,7 @@ public class Main {
                 //AUTO_SERVICE.delete(autos.get(0)
                 // );
                 AUTO_SERVICE.printAll();
+                AUTO_SERVICE.optionalExmaples();
                 break;
             }
             case 2: {
@@ -49,6 +51,7 @@ public class Main {
                 final List<Bus> buses = BUS_SERVICE.createAndSaveBuses(5);
                 BUS_SERVICE.saveBuses(buses);
                 BUS_SERVICE.printAll();
+                BUS_SERVICE.optionalExmaples();
 
                 Bus bus = buses.get(0);
                 bus.setBusRoute(12);
@@ -59,13 +62,15 @@ public class Main {
                 System.out.println("___________________________________________");
                 BUS_SERVICE.saveBuses(buses);
                 BUS_SERVICE.printAll();
+                BUS_SERVICE.optionalExmaples();
                 break;
             }
             case 3:{
                 System.out.println("You create motorbike");
-                final List<Motorbike> motorbikes = MOTORBIKE_SERVICE.createAndSaveMotorbike(4);
+                final List<Motorbike> motorbikes = MOTORBIKE_SERVICE.createAndSaveMotorbike(6);
                 MOTORBIKE_SERVICE.saveMotorbike(motorbikes);
                 MOTORBIKE_SERVICE.printAll();
+                MOTORBIKE_SERVICE.optionalExmaples();
 
                 Motorbike motorbike = motorbikes.get(4);
                 motorbike.setManufacturerMotorbike(ManufacturerMotorbike.BMW);
@@ -74,6 +79,7 @@ public class Main {
                 System.out.println("___________________________________________");
                 MOTORBIKE_SERVICE.saveMotorbike(motorbikes);
                 MOTORBIKE_SERVICE.printAll();
+                MOTORBIKE_SERVICE.optionalExmaples();
                 break;
             }
             default:{

@@ -64,18 +64,10 @@ public class AutoServiceTest {
     }
 
     @Test
-    void findOneById_null1() {
-        final Auto expected = createSimpleAuto();
-        Mockito.when(autoRepository.getById("")).thenReturn(expected);
-        final Auto actual = target.findOneById(null);
-        Assertions.assertEquals(expected.getId(), actual.getId());
-    }
-
-    @Test
     void findOneById_null2() {
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         target.findOneById(null);
-        Mockito.verify(autoRepository).getById(captor.capture());
+        Mockito.verify(autoRepository).findById(captor.capture());
         Assertions.assertEquals("", captor.getValue());
     }
 

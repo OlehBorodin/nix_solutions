@@ -61,19 +61,12 @@ public class BusServiceTest {
         return new Bus("New Model", 123,99, ManufacturerBus.ANKAI, BigDecimal.ONE);
     }
 
-    @Test
-    void findOneById_null1() {
-        final Bus expected = createSimpleBus();
-        Mockito.when(busRepository.getById("")).thenReturn(expected);
-        final Bus actual = target.findOneById(null);
-        Assertions.assertEquals(expected.getId(), actual.getId());
-    }
 
     @Test
     void findOneById_null2() {
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         target.findOneById(null);
-        Mockito.verify(busRepository).getById(captor.capture());
+        Mockito.verify(busRepository).findById(captor.capture());
         Assertions.assertEquals("", captor.getValue());
     }
 

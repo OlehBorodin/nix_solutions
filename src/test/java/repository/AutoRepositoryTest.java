@@ -30,14 +30,14 @@ public class AutoRepositoryTest {
 
     @Test
     void getById_findOne() {
-        final Auto actual = target.getById(auto.getId());
+        final Auto actual = target.findById(auto.getId());
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(auto.getId(), actual.getId());
     }
 
     @Test
     void getById_notFind() {
-        final Auto actual = target.getById("007");
+        final Auto actual = target.findById("007");
         Assertions.assertNull(actual);
     }
 
@@ -45,7 +45,7 @@ public class AutoRepositoryTest {
     void getById_findOne_manyAutos() {
         final Auto auto1 = createSimpleAuto();
         target.save(auto1);
-        final  Auto actual = target.getById(auto.getId());
+        final  Auto actual = target.findById(auto.getId());
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(auto.getId(), actual.getId());
         Assertions.assertNotEquals(actual.getId(), auto1.getId());
@@ -63,7 +63,7 @@ public class AutoRepositoryTest {
         auto.setPrice(BigDecimal.ONE);
         final boolean actual = target.save(auto);
         Assertions.assertTrue(actual);
-        final Auto actualAuto = target.getById(auto.getId());
+        final Auto actualAuto = target.findById(auto.getId());
         Assertions.assertEquals(BigDecimal.ONE, actualAuto.getPrice());
     }
 
@@ -73,7 +73,7 @@ public class AutoRepositoryTest {
     }
     @Test
     void save_success_changePrice() {
-        final Auto actual = target.getById(auto.getId());
+        final Auto actual = target.findById(auto.getId());
         Assertions.assertEquals(BigDecimal.valueOf(30000), actual.getPrice());
     }
 
@@ -107,7 +107,7 @@ public class AutoRepositoryTest {
         auto.setPrice(BigDecimal.TEN);
         final boolean actual = target.update(auto);
         Assertions.assertTrue(actual);
-        final Auto actualAuto = target.getById(auto.getId());
+        final Auto actualAuto = target.findById(auto.getId());
         Assertions.assertEquals(BigDecimal.TEN, actualAuto.getPrice());
     }
 
