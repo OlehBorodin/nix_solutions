@@ -73,9 +73,8 @@ public class AutoRepositoryTest {
     }
     @Test
     void save_success_changePrice() {
-        target.save(auto);
         final Auto actual = target.getById(auto.getId());
-        Assertions.assertEquals(BigDecimal.valueOf(-1), actual.getPrice());
+        Assertions.assertEquals(BigDecimal.valueOf(30000), actual.getPrice());
     }
 
     @Test

@@ -26,7 +26,7 @@ public class MotorbikeRepositoryTest {
 
     private Motorbike createSimpleMotorbike() {
 
-        return new Motorbike ("Good Motorbike", BigDecimal.ONE, ManufacturerMotorbike.KAWASAKI);
+        return new Motorbike ("Good Motorbike", BigDecimal.valueOf(1234), ManufacturerMotorbike.KAWASAKI);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class MotorbikeRepositoryTest {
     void save_success_changePrice() {
         target.save(motorbike);
         final Motorbike motorbike1 = target.getById(motorbike.getId());
-        Assertions.assertEquals(BigDecimal.valueOf(-1), motorbike1.getPrice());
+        Assertions.assertEquals(BigDecimal.valueOf(1234), motorbike1.getPrice());
     }
 
     @Test

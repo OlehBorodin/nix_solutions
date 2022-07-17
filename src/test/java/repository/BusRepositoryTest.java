@@ -76,9 +76,12 @@ public class BusRepositoryTest {
 
     @Test
     void save_success_changePrice() {
+        BigDecimal currentPrice = bus.getPrice();
+        bus.setPrice(BigDecimal.valueOf(1234));
         target.save(bus);
         final Bus bus1 = target.getById(bus.getId());
-        Assertions.assertEquals(BigDecimal.valueOf(-1), bus1.getPrice());
+        Assertions.assertEquals(BigDecimal.valueOf(1234), bus1.getPrice());
+        Assertions.assertNotEquals(currentPrice, bus1.getPrice());
     }
 
     @Test
