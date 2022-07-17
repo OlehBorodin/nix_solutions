@@ -1,6 +1,8 @@
 package com.service;
 
-import com.model.*;
+import com.model.ManufacturerMotorbike;
+import com.model.Motorbike;
+import com.model.Vehicle;
 import com.repository.MotorbikeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
