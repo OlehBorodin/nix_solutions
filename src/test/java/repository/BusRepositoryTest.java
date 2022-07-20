@@ -7,10 +7,13 @@ import com.repository.BusRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
+
+import static org.mockito.Mockito.mock;
 
 public class BusRepositoryTest {
     private BusRepository target;
@@ -26,28 +29,23 @@ public class BusRepositoryTest {
 
     private Bus createSimpleBus() {
 
-        return new Bus("Mega Bus",135,99,
-                ManufacturerBus.ANKAI,BigDecimal.valueOf(45674));
+        return new Bus("Mega Bus", 135, 99,
+                ManufacturerBus.ANKAI, BigDecimal.valueOf(45674));
     }
 
     @Test
     void getById_findOne() {
-        final Bus bus1 = target.findById(bus.getId());
+        final Bus bus1 = target.findById(bus.getId()).get();
         Assertions.assertNotNull(bus1);
         Assertions.assertEquals(bus.getId(), bus1.getId());
     }
 
-    @Test
-    void getById_notFind() {
-        final Bus bus1 = target.findById("123");
-        Assertions.assertNull(bus1);
-    }
 
     @Test
     void getById_findOne_manyAutos() {
         final Bus bus2 = createSimpleBus();
         target.save(bus2);
-        final Bus bus1 = target.findById(bus.getId());
+        final Bus bus1 = target.findById(bus.getId()).get();
         Assertions.assertNotNull(bus1);
         Assertions.assertEquals(bus.getId(), bus1.getId());
         Assertions.assertNotEquals(bus2.getId(), bus1.getId());
@@ -65,7 +63,7 @@ public class BusRepositoryTest {
         bus.setPrice(BigDecimal.ONE);
         final boolean bus1 = target.save(bus);
         Assertions.assertTrue(bus1);
-        final Bus bus3 = target.findById(bus.getId());
+        final Bus bus3 = target.findById(bus.getId()).get();
         Assertions.assertEquals(BigDecimal.ONE, bus3.getPrice());
     }
 
@@ -79,7 +77,7 @@ public class BusRepositoryTest {
         BigDecimal currentPrice = bus.getPrice();
         bus.setPrice(BigDecimal.valueOf(1234));
         target.save(bus);
-        final Bus bus1 = target.findById(bus.getId());
+        final Bus bus1 = target.findById(bus.getId()).get();
         Assertions.assertEquals(BigDecimal.valueOf(1234), bus1.getPrice());
         Assertions.assertNotEquals(currentPrice, bus1.getPrice());
     }
@@ -104,7 +102,7 @@ public class BusRepositoryTest {
 
     @Test
     void update_notFound() {
-        final Bus bus2  = createSimpleBus();
+        final Bus bus2 = createSimpleBus();
         final boolean bus1 = target.update(bus2);
         Assertions.assertFalse(bus1);
     }
@@ -114,11 +112,21 @@ public class BusRepositoryTest {
         bus.setPrice(BigDecimal.TEN);
         final boolean bus1 = target.update(bus);
         Assertions.assertTrue(bus1);
-        final Bus bus2 = target.findById(bus.getId());
+        final Bus bus2 = target.findById(bus.getId()).get();
         Assertions.assertEquals(BigDecimal.TEN, bus2.getPrice());
     }
 
     @Test
     void delete() {
+        BusRepository bus1 = mock(BusRepository.class);
+        try {
+            Mockito.doThrow(new IllegalArgumentException("Delete error"))
+                    .when(bus1)
+                    .delete(bus.getId());
+            bus1.delete("");
+        } catch (Exception e) {
+            System.out.println("ID is empty");
+        }
+
     }
 }
