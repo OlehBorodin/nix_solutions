@@ -1,46 +1,60 @@
 package com.service;
 
-import com.model.Auto;
-import com.model.BodyType;
-import com.model.ManufacturerAuto;
 import com.model.Vehicle;
 import com.repository.CrudRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
-public class AutoService extends VehicleService <Auto> {
+public abstract class VehicleService <T extends Vehicle>{
+    protected static final Logger LOGGER = LoggerFactory.getLogger(VehicleService.class);
 
+    protected static final Random RANDOM = new Random();
+    protected final CrudRepository<T> repository;
 
-
-    public AutoService(CrudRepository<Auto> repository) {
-        super(repository);
+    public VehicleService(CrudRepository<T> repository) {
+        this.repository = repository;
     }
 
 
-    private ManufacturerAuto getRandomManufacturer() {
-        final ManufacturerAuto[] values = ManufacturerAuto.values();
-        final int index = RANDOM.nextInt(values.length);
-        return values[index];
+    public List<T> createAndSaveVehicle(int count) {
+        List<T> result = new LinkedList<>();
+        for (int i = 0; i < count; i++) {
+            final T vehicle = create();
+            result.add(vehicle);
+            repository.save(vehicle);
+            LOGGER.debug("Created vehicle {}", vehicle.getId());
+        }
+        return result;
     }
 
-    private BodyType getBodyType() {
-        final BodyType[] values = BodyType.values();
-        final int index = RANDOM.nextInt(values.length);
-        return values[index];
+    protected abstract T create();
+
+
+    public boolean saveVehicle(List<T> vehicles) {
+        repository.saveAll(vehicles);
+        return false;
+    }
+
+    public void save(T vehicle) {
+        repository.save(vehicle);
     }
 
 
-    @Override
-    protected Auto create() {
-        return new Auto("M5", BigDecimal.valueOf(RANDOM.nextInt(1000)),
-                ManufacturerAuto.BMW,BodyType.SEDAN);
+    public void printAll() {
+        for (Vehicle vehicle : repository.getAll()) {
+            System.out.println(vehicle);
+        }
     }
 
-    public Optional<Auto> findOneById(String id) {
+    public Optional<T> findOneById(String id) {
         return id == null ? repository.findById("") : repository.findById(id);
     }
-
+/*
     private Auto cretaOne() {
         return new Auto(
                 "Model new",
@@ -50,7 +64,7 @@ public class AutoService extends VehicleService <Auto> {
         );
     }
     public void optionalExmaples() {
-        final Auto auto = createAndSaveVehicle(1).get(0);
+        final Auto auto = createAndSaveAutos(1).get(0);
         final String id = auto.getId();
 
         isPresent(id);
@@ -178,7 +192,20 @@ public class AutoService extends VehicleService <Auto> {
                 }
         );
     }
+*/
+    public boolean update(T vehicle) {
+        if(repository.findById(vehicle.getId()).isPresent()){
+            LOGGER.debug("Update vehicle {}", vehicle.getId());
+        }
+        return repository.update(vehicle);
+    }
+    public boolean delete(T vehicle) {
+        if(repository.delete(vehicle.getId())){
+            LOGGER.debug("Delete vehicle {}", vehicle.getId());
+            return true;
+        }
+        return false;
+    }
+
+
 }
-
-
-
