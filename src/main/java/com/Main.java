@@ -4,6 +4,7 @@ import com.model.*;
 import com.repository.AutoRepository;
 import com.repository.BusRepository;
 import com.repository.MotorbikeRepository;
+import com.sell.Discount;
 import com.service.AutoService;
 import com.service.BusService;
 import com.service.MotorbikeService;
@@ -26,12 +27,13 @@ public class Main {
         int choice = in.nextInt();
 
         switch (choice) {
-            case 1: {
+            case 1 -> {
                 System.out.println("You create auto");
-                final List<Auto> autos = AUTO_SERVICE.createAndSaveAutos(4);
-                AUTO_SERVICE.saveAutos(autos);
+                final List<Auto> autos = AUTO_SERVICE.createAndSaveVehicle(4);
+                AUTO_SERVICE.saveVehicle(autos);
                 AUTO_SERVICE.printAll();
                 AUTO_SERVICE.optionalExmaples();
+
 
                 Auto auto = autos.get(2);
                 auto.setModel("new model");
@@ -40,16 +42,19 @@ public class Main {
                 auto.setBodyType(BodyType.CONVERTIBLE);
                 System.out.println("___________________________________________");
                 AUTO_SERVICE.update(auto);
-                //AUTO_SERVICE.delete(autos.get(0)
-                // );
+                AUTO_SERVICE.delete(autos.get(0));
                 AUTO_SERVICE.printAll();
                 AUTO_SERVICE.optionalExmaples();
-                break;
+                System.out.println("___________________________________________");
+                Discount<Auto> autoDiscount = new Discount<>(auto);
+                autoDiscount.printVehicle(auto);
+                autoDiscount.getDiscount(auto);
+                autoDiscount.updatePrice( 20);
             }
-            case 2: {
+            case 2 -> {
                 System.out.println("You create bus");
-                final List<Bus> buses = BUS_SERVICE.createAndSaveBuses(5);
-                BUS_SERVICE.saveBuses(buses);
+                final List<Bus> buses = BUS_SERVICE.createAndSaveVehicle(5);
+                BUS_SERVICE.saveVehicle(buses);
                 BUS_SERVICE.printAll();
                 BUS_SERVICE.optionalExmaples();
 
@@ -60,15 +65,19 @@ public class Main {
                 bus.setPrice(BigDecimal.ONE);
                 bus.setModel("new model");
                 System.out.println("___________________________________________");
-                BUS_SERVICE.saveBuses(buses);
+                BUS_SERVICE.saveVehicle(buses);
                 BUS_SERVICE.printAll();
                 BUS_SERVICE.optionalExmaples();
-                break;
+                System.out.println("___________________________________________");
+                Discount<Bus> busDiscount = new Discount<>(bus);
+                busDiscount.printVehicle(bus);
+                busDiscount.getDiscount(bus);
+                busDiscount.updatePrice( 30);
             }
-            case 3:{
+            case 3 -> {
                 System.out.println("You create motorbike");
-                final List<Motorbike> motorbikes = MOTORBIKE_SERVICE.createAndSaveMotorbike(6);
-                MOTORBIKE_SERVICE.saveMotorbike(motorbikes);
+                final List<Motorbike> motorbikes = MOTORBIKE_SERVICE.createAndSaveVehicle(6);
+                MOTORBIKE_SERVICE.saveVehicle(motorbikes);
                 MOTORBIKE_SERVICE.printAll();
                 MOTORBIKE_SERVICE.optionalExmaples();
 
@@ -77,20 +86,20 @@ public class Main {
                 motorbike.setModel("new model");
                 motorbike.setPrice(BigDecimal.valueOf(1234));
                 System.out.println("___________________________________________");
-                MOTORBIKE_SERVICE.saveMotorbike(motorbikes);
+                MOTORBIKE_SERVICE.saveVehicle(motorbikes);
                 MOTORBIKE_SERVICE.printAll();
                 MOTORBIKE_SERVICE.optionalExmaples();
-                break;
+                System.out.println("___________________________________________");
+                Discount<Motorbike> motorbikeDiscount = new Discount<>(motorbike);
+                motorbikeDiscount.printVehicle(motorbike);
+                motorbikeDiscount.getDiscount(motorbike);
+                motorbikeDiscount.updatePrice( 50);
             }
-            default:{
+            default -> {
                 System.out.println("Sorry, you wrote incorrect number");
-                break;
             }
-
         }
     }
-
-
 
 
     }
