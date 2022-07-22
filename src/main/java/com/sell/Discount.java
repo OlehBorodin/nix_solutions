@@ -29,7 +29,8 @@ public class Discount<T extends Vehicle> {
     }
 
 
-    public void updatePrice(Number X) {
+    public <O extends Number> BigDecimal updatePrice(Number X) {
         vehicle.setPrice(BigDecimal.valueOf(vehicle.getPrice().doubleValue() + X.doubleValue()));
+        return vehicle.getPrice();
     }
 }
