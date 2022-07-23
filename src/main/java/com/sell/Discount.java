@@ -3,7 +3,6 @@ package com.sell;
 import com.model.Vehicle;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class Discount<T extends Vehicle> {
     private final T vehicle;
@@ -12,25 +11,23 @@ public class Discount<T extends Vehicle> {
         this.vehicle = vehicle;
     }
 
-    public void printAll(List<T> vehicles) {
-        for (T vehicle : vehicles) {
-            System.out.println(vehicle);
-        }
-    }
 
     public void printVehicle(T vehicle) {
         System.out.println(vehicle);
     }
 
     public BigDecimal getDiscount(T vehicle) {
+        BigDecimal price = vehicle.getPrice();
         double random = Math.random();
         double range = (30 - 10) * random + 10;
-        return BigDecimal.valueOf(range);
+        return price.subtract(price
+                .multiply(BigDecimal.valueOf(range)
+                        .divide(BigDecimal.valueOf(100))));
     }
 
 
-    public <O extends Number> BigDecimal updatePrice(Number X) {
+    public <O extends Number> void updatePrice(Number X) {
         vehicle.setPrice(BigDecimal.valueOf(vehicle.getPrice().doubleValue() + X.doubleValue()));
-        return vehicle.getPrice();
+        System.out.println(vehicle);
     }
 }

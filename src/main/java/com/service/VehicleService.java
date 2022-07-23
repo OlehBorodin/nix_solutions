@@ -54,18 +54,12 @@ public abstract class VehicleService <T extends Vehicle>{
     public Optional<T> findOneById(String id) {
         return id == null ? repository.findById("") : repository.findById(id);
     }
-/*
-    private Auto cretaOne() {
-        return new Auto(
-                "Model new",
-                BigDecimal.valueOf(RANDOM.nextDouble(1000.0)),
-                getRandomManufacturer(),
-                BodyType.CONVERTIBLE
-        );
-    }
+
+    protected abstract T cretaOne();
+
     public void optionalExmaples() {
-        final Auto auto = createAndSaveAutos(1).get(0);
-        final String id = auto.getId();
+        final Vehicle vehicle = createAndSaveVehicle(1).get(0);
+        final String id = vehicle.getId();
 
         isPresent(id);
         ifPresent(id);
@@ -79,14 +73,14 @@ public abstract class VehicleService <T extends Vehicle>{
 
     }
     private void isPresent(String id) {
-        final Optional<Auto> autoOptional1 = repository.findById(id);
-        autoOptional1.ifPresent(auto -> System.out.println(auto.getModel()));
+        final Optional<T> vehicleOptional1 = repository.findById(id);
+        vehicleOptional1.ifPresent(auto -> System.out.println(auto.getModel()));
 
-        final Optional<Auto> autoOptional2 = repository.findById("123");
-        autoOptional2.ifPresent(auto -> System.out.println(auto.getModel()));
+        final Optional<T> vehicleOptional2 = repository.findById("123");
+        vehicleOptional2.ifPresent(auto -> System.out.println(auto.getModel()));
 
-        if (autoOptional2.isEmpty()) {
-            System.out.println("Auto with id \"123\" not found");
+        if (vehicleOptional2.isEmpty()) {
+            System.out.println("Vehicle with id \"123\" not found");
         }
     }
 
@@ -100,70 +94,70 @@ public abstract class VehicleService <T extends Vehicle>{
         });
     }
     private void orElse(String id) {
-        final Auto auto1 = repository.findById(id).orElse(cretaOne());
-        System.out.println(auto1.getModel());
+        final Vehicle vehicle1 = repository.findById(id).orElse(cretaOne());
+        System.out.println(vehicle1.getModel());
 
         System.out.println("~".repeat(10));
 
-        final Auto auto2 = repository.findById("123").orElse(cretaOne());
-        System.out.println(auto2.getModel());
+        final Vehicle vehicle2 = repository.findById("123").orElse(cretaOne());
+        System.out.println(vehicle2.getModel());
     }
 
     private void orElseThrow(String id) {
-        final Auto auto1 = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Cannot find auto with id " + id));
-        System.out.println(auto1.getModel());
+        final Vehicle vehicle1 = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cannot find vehicle with id " + id));
+        System.out.println(vehicle1.getModel());
 
         System.out.println("~".repeat(10));
 
         try {
-            final Auto auto2 = repository.findById("123")
-                    .orElseThrow(() -> new IllegalArgumentException("Cannot find auto with id " + "123"));
-            System.out.println(auto2.getModel());
+            final Vehicle vehicle2 = repository.findById("123")
+                    .orElseThrow(() -> new IllegalArgumentException("Cannot find vehicle with id " + "123"));
+            System.out.println(vehicle2.getModel());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
 
     private void or(String id) {
-        final Optional<Auto> auto1 = repository.findById(id).or(() -> Optional.of(cretaOne()));
-        auto1.ifPresent(auto -> {
+        final Optional<T> vehicle1 = repository.findById(id).or(() -> Optional.of(cretaOne()));
+        vehicle1.ifPresent(auto -> {
             System.out.println(auto.getModel());
         });
 
         System.out.println("~".repeat(10));
 
-        final Optional<Auto> auto2 = repository.findById("123").or(() -> Optional.of(cretaOne()));
-        auto2.ifPresent(auto -> {
+        final Optional<T> vehicle2 = repository.findById("123").or(() -> Optional.of(cretaOne()));
+        vehicle2.ifPresent(auto -> {
             System.out.println(auto.getModel());
         });
     }
 
     private void orElseGet(String id) {
-        final Auto auto = repository.findById(id).orElse(cretaOne());
-        final Auto auto1 = repository.findById(id).orElseGet(() -> cretaOne());
-        System.out.println(auto1.getModel());
+        final Vehicle vehicle = repository.findById(id).orElse(cretaOne());
+        final Vehicle vehicle1 = repository.findById(id).orElseGet(() -> cretaOne());
+        System.out.println(vehicle1.getModel());
 
         System.out.println("~".repeat(10));
 
-        final Auto auto2 = repository.findById("123").orElseGet(() -> {
-            System.out.println("Cannot find auto with id " + "123");
+        final Vehicle vehicle2 = repository.findById("123").orElseGet(() -> {
+            System.out.println("Cannot find vehicle with id " + "123");
             return cretaOne();
         });
-        System.out.println(auto2.getModel());
+        System.out.println(vehicle2.getModel());
     }
 
     private void filter(String id) {
         repository.findById(id)
-                .filter(auto -> !auto.getBodyType().equals(""))
-                .ifPresent(auto -> {
-                    System.out.println(auto.getModel());
+                .filter(vehicle -> !vehicle.getModel().equals(""))
+                .ifPresent(vehicle -> {
+                    System.out.println(vehicle.getModel());
                 });
 
         repository.findById(id)
-                .filter(auto -> auto.getBodyType().equals(""))
-                .ifPresent(auto -> {
-                    System.out.println(auto.getModel());
+                .filter(vehicle -> vehicle.getModel().equals(""))
+                .ifPresent(vehicle -> {
+                    System.out.println(vehicle.getModel());
                 });
     }
 
@@ -175,24 +169,24 @@ public abstract class VehicleService <T extends Vehicle>{
 
     private void ifPresentOrElse(String id) {
         repository.findById(id).ifPresentOrElse(
-                auto -> {
-                    System.out.println(auto.getModel());
+                vehicle -> {
+                    System.out.println(vehicle.getModel());
                 },
                 () -> {
-                    System.out.println("Cannot find auto with id " + "123");
+                    System.out.println("Cannot find vehicle with id " + "123");
                 }
         );
 
         repository.findById("123").ifPresentOrElse(
-                auto -> {
-                    System.out.println(auto.getModel());
+                vehicle -> {
+                    System.out.println(vehicle.getModel());
                 },
                 () -> {
-                    System.out.println("Cannot find auto with id " + "123");
+                    System.out.println("Cannot find vehicle with id " + "123");
                 }
         );
     }
-*/
+
     public boolean update(T vehicle) {
         if(repository.findById(vehicle.getId()).isPresent()){
             LOGGER.debug("Update vehicle {}", vehicle.getId());

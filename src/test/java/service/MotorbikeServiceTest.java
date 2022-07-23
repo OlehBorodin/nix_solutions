@@ -26,19 +26,19 @@ public class MotorbikeServiceTest {
 
     @Test
     void createMotorbike_negativeCount() {
-        final List<Motorbike> actual = target.createAndSaveMotorbike(-1);
+        final List<Motorbike> actual = target.createAndSaveVehicle(-1);
         Assertions.assertEquals(0, actual.size());
     }
 
     @Test
     void createMotorbike_zeroCount() {
-        final List<Motorbike> actual = target.createAndSaveMotorbike(0);
+        final List<Motorbike> actual = target.createAndSaveVehicle(0);
         Assertions.assertEquals(0, actual.size());
     }
 
     @Test
     void createMotorbikes() {
-        final List<Motorbike> actual = target.createAndSaveMotorbike(5);
+        final List<Motorbike> actual = target.createAndSaveVehicle(5);
         Assertions.assertEquals(5, actual.size());
         Mockito.verify(motorbikeRepository, Mockito.times(5))
                 .save(Mockito.any());
@@ -46,7 +46,7 @@ public class MotorbikeServiceTest {
 
     @Test
     void saveMotorbikes() {
-        final boolean motorbike1 = target.saveMotorbike(Collections.emptyList());
+        final boolean motorbike1 = target.saveVehicle(Collections.emptyList());
         Assertions.assertFalse(motorbike1);
     }
 
