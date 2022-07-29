@@ -1,5 +1,6 @@
 package com;
 
+import com.garage.Garage;
 import com.model.*;
 import com.repository.AutoRepository;
 import com.repository.BusRepository;
@@ -13,12 +14,15 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Main {
     private static final AutoService AUTO_SERVICE = new AutoService(new AutoRepository());
     private static final BusService BUS_SERVICE = new BusService(new BusRepository());
     private static final MotorbikeService MOTORBIKE_SERVICE = new MotorbikeService(new MotorbikeRepository());
 
     public static void main(String[] args) {
+
+        Garage garage = new Garage();
         System.out.println("Hello,\n" +
                 " if you want create autos touch  1\n" +
                 " if you want create buses touch 2\n" +
@@ -50,6 +54,22 @@ public class Main {
                 autoDiscount.printVehicle(auto);
                 autoDiscount.getDiscount(auto);
                 autoDiscount.updatePrice( 20);
+                System.out.println("___________________________________________");
+                garage.add(autos.get(1));
+                garage.add(auto);
+                garage.addHead(autos.get(2));
+                garage.printAll();
+                System.out.println(garage.getRestylingVehicle(auto.getRestyling()));
+                garage.forEach();
+                System.out.println("------forEach---------");
+                garage.deleteRestylingVehicle(auto.getRestyling());
+                System.out.println("_____delete_____");
+                garage.printAll();
+                System.out.println(garage.restylingNumber(auto));
+                System.out.println("--------");
+                garage.printAll();
+                System.out.println(garage.getRestylingData());
+
             }
             case 2 -> {
                 System.out.println("You create bus");
@@ -73,6 +93,21 @@ public class Main {
                 busDiscount.printVehicle(bus);
                 busDiscount.getDiscount(bus);
                 busDiscount.updatePrice( 30);
+                System.out.println("___________________________________________");
+                garage.add(buses.get(1));
+                garage.add(bus);
+                garage.addHead(buses.get(2));
+                garage.printAll();
+                System.out.println(garage.getRestylingVehicle(bus.getRestyling()));
+                garage.forEach();
+                System.out.println("------forEach---------");
+                garage.deleteRestylingVehicle(bus.getRestyling());
+                System.out.println("_____delete_____");
+                garage.printAll();
+                System.out.println(garage.restylingNumber(bus));
+                System.out.println("--------");
+                garage.printAll();
+                System.out.println(garage.getRestylingData());
             }
             case 3 -> {
                 System.out.println("You create motorbike");
@@ -94,6 +129,22 @@ public class Main {
                 motorbikeDiscount.printVehicle(motorbike);
                 motorbikeDiscount.getDiscount(motorbike);
                 motorbikeDiscount.updatePrice( 50);
+                System.out.println("___________________________________________");
+                garage.add(motorbikes.get(1));
+                garage.add(motorbike);
+                garage.addHead(motorbikes.get(2));
+                garage.printAll();
+                System.out.println("--------------");
+                System.out.println(garage.getRestylingVehicle(motorbike.getRestyling()));
+                garage.forEach();
+                System.out.println("------forEach---------");
+                garage.deleteRestylingVehicle(motorbike.getRestyling());
+                System.out.println("_____delete_____");
+                garage.printAll();
+                System.out.println(garage.restylingNumber(motorbike));
+                System.out.println("--------");
+                garage.printAll();
+                System.out.println(garage.getRestylingData());
             }
             default -> {
                 System.out.println("Sorry, you wrote incorrect number");

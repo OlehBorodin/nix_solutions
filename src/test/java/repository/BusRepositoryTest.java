@@ -30,7 +30,7 @@ public class BusRepositoryTest {
     private Bus createSimpleBus() {
 
         return new Bus("Mega Bus", 135, 99,
-                ManufacturerBus.ANKAI, BigDecimal.valueOf(45674));
+                ManufacturerBus.ANKAI, BigDecimal.valueOf(45674), 1);
     }
 
     @Test

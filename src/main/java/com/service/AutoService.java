@@ -26,7 +26,7 @@ public class AutoService extends VehicleService <Auto> {
     @Override
     protected Auto create() {
         return new Auto("M5", BigDecimal.valueOf(RANDOM.nextInt(1000)),
-                ManufacturerAuto.BMW,BodyType.SEDAN);
+                ManufacturerAuto.BMW,BodyType.SEDAN, 1);
     }
 
     protected Auto cretaOne() {
@@ -34,7 +34,8 @@ public class AutoService extends VehicleService <Auto> {
                 "Model new",
                 BigDecimal.valueOf(RANDOM.nextDouble(1000.0)),
                 getRandomManufacturer(),
-                BodyType.CONVERTIBLE
+                BodyType.CONVERTIBLE,
+                1
         );
     }
 

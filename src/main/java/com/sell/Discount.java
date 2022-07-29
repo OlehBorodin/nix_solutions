@@ -11,7 +11,6 @@ public class Discount<T extends Vehicle> {
         this.vehicle = vehicle;
     }
 
-
     public void printVehicle(T vehicle) {
         System.out.println(vehicle);
     }
@@ -26,8 +25,9 @@ public class Discount<T extends Vehicle> {
     }
 
 
-    public <O extends Number> void updatePrice(Number X) {
+    public <O extends Number> BigDecimal updatePrice(Number X) {
         vehicle.setPrice(BigDecimal.valueOf(vehicle.getPrice().doubleValue() + X.doubleValue()));
         System.out.println(vehicle);
+        return vehicle.getPrice();
     }
 }

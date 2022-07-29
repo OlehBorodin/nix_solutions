@@ -58,7 +58,8 @@ public class BusServiceTest {
     }
 
     private Bus createSimpleBus() {
-        return new Bus("New Model", 123,99, ManufacturerBus.ANKAI, BigDecimal.ONE);
+        return new Bus("New Model", 123,99,
+                ManufacturerBus.ANKAI, BigDecimal.ONE, 1);
     }
 
 

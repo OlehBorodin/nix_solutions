@@ -60,7 +60,7 @@ public class AutoServiceTest {
 
     private Auto createSimpleAuto() {
 
-        return new Auto("X1", BigDecimal.ONE,ManufacturerAuto.BMW, BodyType.SUV );
+        return new Auto("X1", BigDecimal.ONE,ManufacturerAuto.BMW, BodyType.SUV, 1 );
     }
 
     @Test

@@ -16,7 +16,7 @@ public class BusService extends VehicleService<Bus> {
     @Override
     protected Bus create() {
         return new Bus("Model Bus", 12, 99,
-                ManufacturerBus.ANKAI, BigDecimal.valueOf(RANDOM.nextInt(1000)));
+                ManufacturerBus.ANKAI, BigDecimal.valueOf(RANDOM.nextInt(1000)),1);
     }
 
 
@@ -26,7 +26,8 @@ public class BusService extends VehicleService<Bus> {
                 123,
                 65,
                 ManufacturerBus.ANKAI,
-                BigDecimal.valueOf(12200)
+                BigDecimal.valueOf(12200),
+                1
         );
     }
     }

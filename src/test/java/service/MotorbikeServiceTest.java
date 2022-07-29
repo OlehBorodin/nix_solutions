@@ -59,7 +59,7 @@ public class MotorbikeServiceTest {
 
     private Motorbike createSimpleMotorbike() {
 
-        return new Motorbike("Model", BigDecimal.ONE, ManufacturerMotorbike.YAMAHA);
+        return new Motorbike("Model", BigDecimal.ONE, ManufacturerMotorbike.YAMAHA, 1);
     }
 
     @Test

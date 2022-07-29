@@ -15,7 +15,7 @@ public class MotorbikeService extends VehicleService<Motorbike> {
 
     @Override
     protected Motorbike create() {
-        return new Motorbike("Motorbike model", BigDecimal.valueOf(2000), ManufacturerMotorbike.HONDA);
+        return new Motorbike("Motorbike model", BigDecimal.valueOf(2000), ManufacturerMotorbike.HONDA,1);
     }
 
 
@@ -23,7 +23,8 @@ public class MotorbikeService extends VehicleService<Motorbike> {
         return new Motorbike(
                 "Model new Motorbike",
                 BigDecimal.valueOf(10000),
-                ManufacturerMotorbike.KAWASAKI
+                ManufacturerMotorbike.KAWASAKI,
+                1
         );
     }
 }

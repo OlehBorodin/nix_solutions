@@ -29,7 +29,7 @@ public class MotorbikeRepositoryTest {
 
     private Motorbike createSimpleMotorbike() {
 
-        return new Motorbike("Good Motorbike", BigDecimal.valueOf(1234), ManufacturerMotorbike.KAWASAKI);
+        return new Motorbike("Good Motorbike", BigDecimal.valueOf(1234), ManufacturerMotorbike.KAWASAKI,1);
     }
 
     @Test

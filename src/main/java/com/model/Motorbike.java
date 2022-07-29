@@ -12,8 +12,8 @@ public class Motorbike extends Vehicle {
 
     protected ManufacturerMotorbike manufacturerMotorbike;
 
-    public Motorbike(String model, BigDecimal price, ManufacturerMotorbike manufacturerMotorbike) {
-        super(model, price);
+    public Motorbike(String model, BigDecimal price, ManufacturerMotorbike manufacturerMotorbike, int count) {
+        super(model, price, count);
         this.manufacturerMotorbike = manufacturerMotorbike;
     }
 
@@ -23,7 +23,10 @@ public class Motorbike extends Vehicle {
                 "manufacturerMotorbike=" + manufacturerMotorbike +
                 ", id='" + id + '\'' +
                 ", model='" + model + '\'' +
+                ", restyling='" + restyling + '\'' +
                 ", price=" + price +
+                ", time=" + time +
+                ", count=" + count +
                 '}';
     }
 }

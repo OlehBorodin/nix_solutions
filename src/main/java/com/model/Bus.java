@@ -14,19 +14,16 @@ public class Bus extends Vehicle {
 
     protected ManufacturerBus manufacturerBus;
 
+
     public Bus(String model, int busRoute, int passengersNumber,
-               ManufacturerBus manufacturerBus, BigDecimal price) {
-        super(model, price);
+               ManufacturerBus manufacturerBus, BigDecimal price, int count) {
+        super(model, price, count);
         this.busRoute = busRoute;
         this.manufacturerBus = manufacturerBus;
         this.passengersNumber = passengersNumber;
 
 
     }
-
-
-
-
     @Override
     public String toString() {
         return "Bus{" +
@@ -35,7 +32,10 @@ public class Bus extends Vehicle {
                 ", manufacturerBus=" + manufacturerBus +
                 ", id='" + id + '\'' +
                 ", model='" + model + '\'' +
+                ", restyling='" + restyling + '\'' +
                 ", price=" + price +
+                ", time=" + time +
+                ", count=" + count +
                 '}';
     }
 }
