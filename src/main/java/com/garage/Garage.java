@@ -11,7 +11,6 @@ public class Garage<G extends Vehicle> {
 
     private Node<G> currentPointer;
     private Node<G> head;
-    private Node<G> tail;
 
     @Data
     private static class Node<G> {
@@ -32,21 +31,21 @@ public class Garage<G extends Vehicle> {
     }
 
     public void add(G vehicle) {
-        Node<G> newNode = new Node<>(null, vehicle, null);
-        newNode.setVehicle(vehicle);
+        Node<G> node = new Node<>(null, vehicle, null);
+        node.setVehicle(vehicle);
 
         Node<G> last = getTail();
         if (last == null) {
-            head = newNode;
+            head = node;
             return;
         }
-        last.setNext(newNode);
-        newNode.setPrevious(last);
+        last.setNext(node);
+        node.setPrevious(last);
     }
 
 
     public void addHead(G vehicle) {
-        Node<G> node = new Node<G>(null, vehicle, null);
+        Node<G> node = new Node<>(null, vehicle, null);
         node.setVehicle(vehicle);
         node.setPrevious(null);
         if (head != null) {
@@ -78,7 +77,6 @@ public class Garage<G extends Vehicle> {
     }
 
     private void unlinked(Node<G> node) {
-        G vehicle = node.vehicle;
         Node<G> prev = node.previous;
         Node<G> next = node.next;
         if (prev == null) {
@@ -89,7 +87,6 @@ public class Garage<G extends Vehicle> {
         }
 
         if (next == null) {
-            tail = prev;
         } else {
             next.previous = prev;
             node.next = null;
@@ -99,7 +96,7 @@ public class Garage<G extends Vehicle> {
 
     }
 
-    public boolean deleteRestylingVehicle(String restyling) {
+    public void deleteRestylingVehicle(String restyling) {
         Optional<Node<G>> current = Optional.of(this.head);
         while (!current.get().getVehicle().getRestyling().equals(restyling)) {
             current = Optional.of(current.get().next);
@@ -107,10 +104,9 @@ public class Garage<G extends Vehicle> {
         for (Node<G> x = head; x != null; x = x.next) {
             if (current.get().vehicle.equals(x.vehicle)) {
                 unlinked(x);
-                return true;
+                return;
             }
         }
-        return false;
     }
 
     public Optional<Node<G>> update(G toVehicle, G fromVehicle) {

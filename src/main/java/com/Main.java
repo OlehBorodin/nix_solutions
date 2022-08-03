@@ -11,6 +11,7 @@ import com.service.BusService;
 import com.service.MotorbikeService;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,6 +20,11 @@ public class Main {
     private static final AutoService AUTO_SERVICE = new AutoService(new AutoRepository());
     private static final BusService BUS_SERVICE = new BusService(new BusRepository());
     private static final MotorbikeService MOTORBIKE_SERVICE = new MotorbikeService(new MotorbikeRepository());
+
+    static final Comparator<Vehicle> comparator = Comparator.comparing(Vehicle::getPrice)
+            .reversed()
+            .thenComparing(vehicle -> vehicle.getClass().getSimpleName())
+            .thenComparing(Vehicle::getCount);
 
     public static void main(String[] args) {
 
@@ -69,6 +75,13 @@ public class Main {
                 System.out.println("--------");
                 garage.printAll();
                 System.out.println(garage.getRestylingData());
+                System.out.println("----Comparator----");
+
+                autos.sort(comparator);
+                for (Auto vehicle : autos) {
+                    System.out.println(vehicle);
+                }
+
 
             }
             case 2 -> {
@@ -108,6 +121,12 @@ public class Main {
                 System.out.println("--------");
                 garage.printAll();
                 System.out.println(garage.getRestylingData());
+                System.out.println("----Comparator----");
+
+                buses.sort(comparator);
+                for (Bus vehicle : buses) {
+                    System.out.println(vehicle);
+                }
             }
             case 3 -> {
                 System.out.println("You create motorbike");
@@ -145,6 +164,12 @@ public class Main {
                 System.out.println("--------");
                 garage.printAll();
                 System.out.println(garage.getRestylingData());
+                System.out.println("----Comparator----");
+
+                motorbikes.sort(comparator);
+                for (Motorbike vehicle : motorbikes) {
+                    System.out.println(vehicle);
+                }
             }
             default -> {
                 System.out.println("Sorry, you wrote incorrect number");
