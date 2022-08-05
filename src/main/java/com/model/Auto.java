@@ -11,8 +11,8 @@ public class Auto extends Vehicle {
     private BodyType bodyType;
     private ManufacturerAuto manufacturerAuto;
 
-    public Auto(String model, BigDecimal price, ManufacturerAuto manufacturerAuto, BodyType bodyType) {
-        super(model, price);
+    public Auto(String model, BigDecimal price, ManufacturerAuto manufacturerAuto, BodyType bodyType, int count) {
+        super(model, price, count);
         this.manufacturerAuto = manufacturerAuto;
         this.bodyType = bodyType;
     }
@@ -20,11 +20,17 @@ public class Auto extends Vehicle {
     @Override
     public String toString() {
         return "Auto{" +
-                "bodyType='" + bodyType + '\'' +
+                "bodyType=" + bodyType +
+                ", manufacturerAuto=" + manufacturerAuto +
                 ", id='" + id + '\'' +
                 ", model='" + model + '\'' +
+                ", restyling='" + restyling + '\'' +
                 ", price=" + price +
-                ", manufacturer=" + manufacturerAuto +
+                ", time=" + time +
+                ", count=" + count +
                 '}';
+
+
+
     }
 }

@@ -27,19 +27,19 @@ public class AutoServiceTest {
 
     @Test
     void createAutos_negativeCount() {
-        final List<Auto> actual = target.createAndSaveAutos(-1);
+        final List<Auto> actual = target.createAndSaveVehicle(-1);
         Assertions.assertEquals(0, actual.size());
     }
 
     @Test
     void createAutos_zeroCount() {
-        final List<Auto> actual = target.createAndSaveAutos(0);
+        final List<Auto> actual = target.createAndSaveVehicle(0);
         Assertions.assertEquals(0, actual.size());
     }
 
     @Test
     void createAutos() {
-        final List<Auto> actual = target.createAndSaveAutos(5);
+        final List<Auto> actual = target.createAndSaveVehicle(5);
         Assertions.assertEquals(5, actual.size());
         Mockito.verify(autoRepository, Mockito.times(5))
                 .save(Mockito.any());
@@ -47,7 +47,7 @@ public class AutoServiceTest {
 
     @Test
     void saveAutos() {
-        final boolean auto1 = target.saveAutos(Collections.emptyList());
+        final boolean auto1 = target.saveVehicle(Collections.emptyList());
         Assertions.assertFalse(auto1);
     }
 
@@ -60,7 +60,7 @@ public class AutoServiceTest {
 
     private Auto createSimpleAuto() {
 
-        return new Auto("X1", BigDecimal.ONE,ManufacturerAuto.BMW, BodyType.SUV );
+        return new Auto("X1", BigDecimal.ONE,ManufacturerAuto.BMW, BodyType.SUV, 1 );
     }
 
     @Test

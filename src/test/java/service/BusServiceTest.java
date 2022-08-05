@@ -26,19 +26,19 @@ public class BusServiceTest {
 
     @Test
     void createBuses_negativeCount() {
-        final List<Bus> actual = target.createAndSaveBuses(-1);
+        final List<Bus> actual = target.createAndSaveVehicle(-1);
         Assertions.assertEquals(0, actual.size());
     }
 
     @Test
     void createBuses_zeroCount() {
-        final List<Bus> actual = target.createAndSaveBuses(0);
+        final List<Bus> actual = target.createAndSaveVehicle(0);
         Assertions.assertEquals(0, actual.size());
     }
 
     @Test
     void createBuses() {
-        final List<Bus> actual = target.createAndSaveBuses(5);
+        final List<Bus> actual = target.createAndSaveVehicle(5);
         Assertions.assertEquals(5, actual.size());
         Mockito.verify(busRepository, Mockito.times(5))
                 .save(Mockito.any());
@@ -46,7 +46,7 @@ public class BusServiceTest {
 
     @Test
     void saveBuses() {
-        final boolean bus1 = target.saveBuses(Collections.emptyList());
+        final boolean bus1 = target.saveVehicle(Collections.emptyList());
         Assertions.assertFalse(bus1);
     }
 
@@ -58,7 +58,8 @@ public class BusServiceTest {
     }
 
     private Bus createSimpleBus() {
-        return new Bus("New Model", 123,99, ManufacturerBus.ANKAI, BigDecimal.ONE);
+        return new Bus("New Model", 123,99,
+                ManufacturerBus.ANKAI, BigDecimal.ONE, 1);
     }
 
 

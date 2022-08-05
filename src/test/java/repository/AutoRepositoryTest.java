@@ -28,7 +28,7 @@ public class AutoRepositoryTest {
     }
 
     private Auto createSimpleAuto() {
-        return new Auto("M5", BigDecimal.valueOf(30000), ManufacturerAuto.BMW, BodyType.SEDAN);
+        return new Auto("M5", BigDecimal.valueOf(30000), ManufacturerAuto.BMW, BodyType.SEDAN, 1);
     }
 
     @Test
