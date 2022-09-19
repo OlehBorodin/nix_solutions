@@ -10,10 +10,19 @@ import java.util.Optional;
 
 public class MotorbikeRepository implements CrudRepository<Motorbike> {
 
+    public static MotorbikeRepository instance;
     private final List<Motorbike> motorbikes;
 
     public MotorbikeRepository() {
         motorbikes = new ArrayList<>();
+    }
+
+
+    public static MotorbikeRepository getInstance(){
+        if(instance==null){
+            instance = new MotorbikeRepository();
+        }
+        return instance;
     }
 
     @Override

@@ -12,7 +12,7 @@ public class Auto extends Vehicle {
     private ManufacturerAuto manufacturerAuto;
 
     public Auto(String model, BigDecimal price, ManufacturerAuto manufacturerAuto, BodyType bodyType, int count) {
-        super(model, price, count);
+        super(model, price, count, VehicleType.AUTO);
         this.manufacturerAuto = manufacturerAuto;
         this.bodyType = bodyType;
     }
@@ -28,9 +28,7 @@ public class Auto extends Vehicle {
                 ", price=" + price +
                 ", time=" + time +
                 ", count=" + count +
+                ", type=" + type +
                 '}';
-
-
-
     }
 }

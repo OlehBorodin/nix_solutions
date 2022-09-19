@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -16,14 +17,28 @@ public abstract class Vehicle {
     protected BigDecimal price;
     protected DateTimeFormatter time;
     protected int count;
+    protected VehicleType type;
 
-    protected Vehicle(String model, BigDecimal price, int count) {
+    protected Vehicle(String model, BigDecimal price, int count, VehicleType type) {
         this.id = UUID.randomUUID().toString();
         this.model = model;
         this.price = price;
         this.count = count;
         this.restyling = UUID.randomUUID().toString();
-        this.time =  DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");;
+        this.time =  DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        this.type = type;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return Objects.equals(id, vehicle.id);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
+

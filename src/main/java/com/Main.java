@@ -1,25 +1,16 @@
 package com;
 
-import com.garage.Garage;
-import com.model.*;
-import com.repository.AutoRepository;
-import com.repository.BusRepository;
-import com.repository.MotorbikeRepository;
-import com.sell.Discount;
-import com.service.AutoService;
-import com.service.BusService;
-import com.service.MotorbikeService;
+import com.command.Action;
+import com.command.Command;
+import com.model.Vehicle;
+import com.util.UserInputUtil;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Scanner;
 
 
 public class Main {
-    private static final AutoService AUTO_SERVICE = new AutoService(new AutoRepository());
-    private static final BusService BUS_SERVICE = new BusService(new BusRepository());
-    private static final MotorbikeService MOTORBIKE_SERVICE = new MotorbikeService(new MotorbikeRepository());
 
     static final Comparator<Vehicle> comparator = Comparator.comparing(Vehicle::getPrice)
             .reversed()
@@ -28,6 +19,28 @@ public class Main {
 
     public static void main(String[] args) {
 
+
+        final Action[] actions = Action.values();
+        final List<String> names = getNames(actions);
+        Command command;
+        do {
+            command = executeCommand(actions, names);
+        } while (command != null);
+
+    }
+    private static Command executeCommand(Action[] actions, List<String> names) {
+        int userInput = UserInputUtil.getUserInput("What you want:", names);
+        final Action action = actions[userInput];
+        return action.execute();
+    }
+    private static List<String> getNames(Action[] actions) {
+        final List<String> names = new ArrayList<>(actions.length);
+        for (Action action : actions) {
+            names.add(action.getName());
+        }
+        return names;
+    }
+/*
         Garage garage = new Garage();
         System.out.println("Hello,\n" +
                 " if you want create autos touch  1\n" +
@@ -174,10 +187,10 @@ public class Main {
             default -> {
                 System.out.println("Sorry, you wrote incorrect number");
             }
-        }
+        }*/
     }
 
 
-    }
+
 
 
