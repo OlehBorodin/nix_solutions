@@ -5,12 +5,13 @@ import com.repository.CrudRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public abstract class VehicleService <T extends Vehicle>{
+public abstract class VehicleService<T extends Vehicle> {
     protected static final Logger LOGGER = LoggerFactory.getLogger(VehicleService.class);
 
     protected static final Random RANDOM = new Random();
@@ -27,7 +28,7 @@ public abstract class VehicleService <T extends Vehicle>{
             final T vehicle = create();
             result.add(vehicle);
             repository.save(vehicle);
-            LOGGER.debug("Created vehicle {}", vehicle.getId());
+            LOGGER.info("Created vehicle {}", vehicle.getId());
         }
         return result;
     }
@@ -51,6 +52,40 @@ public abstract class VehicleService <T extends Vehicle>{
         }
     }
 
+    public boolean update(T vehicle) {
+        if (repository.findById(vehicle.getId()).isPresent()) {
+            LOGGER.info("Update vehicle {}", vehicle.getId());
+        }
+        return repository.update(vehicle);
+
+    }
+
+    public void updateVehicleByPrice(String id, BigDecimal price) {
+        Optional<T> vehicle = repository.findById(id);
+        vehicle.ifPresent(vehicle1 -> {
+            vehicle1.setPrice(price);
+            repository.update(vehicle1);
+        });
+    }
+
+    public void delete(String id) {
+        repository.delete(id);
+        LOGGER.info("Deleted auto {}", id);
+    }
+
+    public boolean delete(T vehicle) {
+        if (repository.delete(vehicle.getId())) {
+            LOGGER.info("Delete vehicle {}", vehicle.getId());
+            return true;
+        }
+        return false;
+    }
+
+    public List<T> getAll() {
+        return repository.getAll();
+    }
+
+
     public Optional<T> findOneById(String id) {
         return id == null ? repository.findById("") : repository.findById(id);
     }
@@ -72,6 +107,7 @@ public abstract class VehicleService <T extends Vehicle>{
         ifPresentOrElse(id);
 
     }
+
     private void isPresent(String id) {
         final Optional<T> vehicleOptional1 = repository.findById(id);
         vehicleOptional1.ifPresent(auto -> System.out.println(auto.getModel()));
@@ -93,6 +129,7 @@ public abstract class VehicleService <T extends Vehicle>{
             System.out.println(auto.getModel());
         });
     }
+
     private void orElse(String id) {
         final Vehicle vehicle1 = repository.findById(id).orElse(cretaOne());
         System.out.println(vehicle1.getModel());
@@ -185,20 +222,6 @@ public abstract class VehicleService <T extends Vehicle>{
                     System.out.println("Cannot find vehicle with id " + "123");
                 }
         );
-    }
-
-    public boolean update(T vehicle) {
-        if(repository.findById(vehicle.getId()).isPresent()){
-            LOGGER.debug("Update vehicle {}", vehicle.getId());
-        }
-        return repository.update(vehicle);
-    }
-    public boolean delete(T vehicle) {
-        if(repository.delete(vehicle.getId())){
-            LOGGER.debug("Delete vehicle {}", vehicle.getId());
-            return true;
-        }
-        return false;
     }
 
 

@@ -7,7 +7,11 @@
     <groupId>ua.com</groupId>
     <artifactId>lessons</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <modules>
+        <module>solid</module>
+    </modules>
+    <packaging>pom</packaging>
+    <url>http://maven.apache.org</url>
 
 
     <properties>
