@@ -11,7 +11,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public abstract class Vehicle {
-    protected final String id;
+    protected  String id;
     protected String model;
     protected String restyling;
     protected BigDecimal price;
@@ -27,6 +27,10 @@ public abstract class Vehicle {
         this.restyling = UUID.randomUUID().toString();
         this.time =  DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         this.type = type;
+    }
+
+    public Vehicle() {
+        this.id = UUID.randomUUID().toString();
     }
 
     @Override

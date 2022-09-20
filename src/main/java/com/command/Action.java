@@ -8,6 +8,7 @@ public enum Action {
     UPDATE("Update vehicles", new Update()),
     PRINT("Print vehicles", new Print()),
     DELETE("Delete vehicle", new Delete()),
+    BUILDER("Implementation Builder in Auto", new Builder()),
     EXIT("Exit", null);
 
     private final String name;
