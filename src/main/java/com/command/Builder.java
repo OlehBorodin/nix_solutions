@@ -10,11 +10,11 @@ public class Builder implements Command {
     @Override
     public void execute() {
         Auto auto = new Auto.Builder()
-                .withAutoManufacturer(ManufacturerAuto.KIA)
-                .withCount(1)
-                .withPrice(BigDecimal.valueOf(7000000))
-                .withBodyType(BodyType.COUPE)
-                .withModel("NM-3")
+                .setAutoManufacturer(ManufacturerAuto.KIA)
+                .setCount(1)
+                .setPrice(BigDecimal.valueOf(7000000))
+                .setBodyType(BodyType.COUPE)
+                .setModel("NM-3")
                 .build();
         System.out.println(auto);
     }

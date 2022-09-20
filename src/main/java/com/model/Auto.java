@@ -24,6 +24,7 @@ public class Auto extends Vehicle {
 
     public static class Builder {
         private final Auto newAuto;
+
         public Builder() {
             newAuto = new Auto();
         }
@@ -35,27 +36,27 @@ public class Auto extends Vehicle {
                     '}';
         }
 
-        public Builder withModel(String model) {
+        public Builder setModel(String model) {
             newAuto.model = model;
             return this;
         }
 
-        public Builder withAutoManufacturer(ManufacturerAuto manufacturerAuto) {
+        public Builder setAutoManufacturer(ManufacturerAuto manufacturerAuto) {
             newAuto.manufacturerAuto = manufacturerAuto;
             return this;
         }
 
-        public Builder withBodyType(BodyType bodyType) {
+        public Builder setBodyType(BodyType bodyType) {
             newAuto.bodyType = bodyType;
             return this;
         }
 
-        public Builder withPrice(BigDecimal price) {
+        public Builder setPrice(BigDecimal price) {
             newAuto.price = price;
             return this;
         }
 
-        public Builder withCount(int count) {
+        public Builder setCount(int count) {
             newAuto.count = count;
             return this;
         }
@@ -74,6 +75,7 @@ public class Auto extends Vehicle {
         }
 
     }
+
     @Override
     public String toString() {
         return "Auto{" +
