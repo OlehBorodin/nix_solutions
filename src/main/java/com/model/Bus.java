@@ -17,7 +17,7 @@ public class Bus extends Vehicle {
 
     public Bus(String model, int busRoute, int passengersNumber,
                ManufacturerBus manufacturerBus, BigDecimal price, int count) {
-        super(model, price, count);
+        super(model, price, count, VehicleType.BUS);
         this.busRoute = busRoute;
         this.manufacturerBus = manufacturerBus;
         this.passengersNumber = passengersNumber;
@@ -36,6 +36,7 @@ public class Bus extends Vehicle {
                 ", price=" + price +
                 ", time=" + time +
                 ", count=" + count +
+                ", type=" + type +
                 '}';
     }
 }
